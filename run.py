@@ -1,4 +1,4 @@
 from Windows import Windows
 
-#starting program
+# starting program
 rental = Windows()
