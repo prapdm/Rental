@@ -17,17 +17,17 @@ class SetupWindow():
         master.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
         master.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
 
-        label1 = tk.Label(master, text="Adress").grid(row=0, sticky=W, padx=10, pady=5)
-        input1 = tk.Entry(master, bd=1).grid(row=0, column=1, padx=20, pady=5)
+        tk.Label(master, text="Adress").grid(row=0, sticky=W, padx=10, pady=5)
+        tk.Entry(master, bd=1).grid(row=0, column=1, padx=20, pady=5)
 
-        label2 = tk.Label(master, text="Port").grid(row=1, sticky=W, padx=10, pady=5)
-        input2 = tk.Entry(master, bd=1).grid(row=1, column=1, padx=20, pady=5)
+        tk.Label(master, text="Port").grid(row=1, sticky=W, padx=10, pady=5)
+        tk.Entry(master, bd=1).grid(row=1, column=1, padx=20, pady=5)
 
-        label3 = tk.Label(master, text="Data base user").grid(row=2, sticky=W, padx=10, pady=5)
-        input3 = tk.Entry(master, bd=1).grid(row=2, column=1, padx=20, pady=5)
+        tk.Label(master, text="Data base user").grid(row=2, sticky=W, padx=10, pady=5)
+        tk.Entry(master, bd=1).grid(row=2, column=1, padx=20, pady=5)
 
-        label4 = tk.Label(master, text="Data base name").grid(row=3, sticky=W, padx=10, pady=5)
-        input4 = tk.Entry(master, bd=1).grid(row=3, column=1, padx=20, pady=5)
+        tk.Label(master, text="Data base name").grid(row=3, sticky=W, padx=10, pady=5)
+        tk.Entry(master, bd=1).grid(row=3, column=1, padx=20, pady=5)
 
         connection_info = tk.Label(master).grid(row=4, sticky=W, padx=20, pady=5)
 
