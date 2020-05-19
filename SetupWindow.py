@@ -17,16 +17,18 @@ class SetupWindow():
         master.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
         master.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
 
-        tk.Label(master, text="Adress").grid(row=0, sticky=W, padx=10, pady=5)
+        tk.Label(master, text="Database adress").grid(row=0, sticky=W, padx=10, pady=5)
         tk.Entry(master, bd=1).grid(row=0, column=1, padx=20, pady=5)
 
-        tk.Label(master, text="Port").grid(row=1, sticky=W, padx=10, pady=5)
-        tk.Entry(master, bd=1).grid(row=1, column=1, padx=20, pady=5)
 
-        tk.Label(master, text="Data base user").grid(row=2, sticky=W, padx=10, pady=5)
+        tk.Label(master, text="Port").grid(row=1, sticky=W, padx=10, pady=5)
+        v = StringVar(master, value='3306')
+        tk.Entry(master, bd=1, textvariable=v).grid(row=1, column=1, padx=20, pady=5)
+
+        tk.Label(master, text="Database user").grid(row=2, sticky=W, padx=10, pady=5)
         tk.Entry(master, bd=1).grid(row=2, column=1, padx=20, pady=5)
 
-        tk.Label(master, text="Data base name").grid(row=3, sticky=W, padx=10, pady=5)
+        tk.Label(master, text="Database name").grid(row=3, sticky=W, padx=10, pady=5)
         tk.Entry(master, bd=1).grid(row=3, column=1, padx=20, pady=5)
 
         tk.Label(master).grid(row=4, sticky=W, padx=20, pady=5)
