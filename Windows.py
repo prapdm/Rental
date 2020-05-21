@@ -45,6 +45,9 @@ class Windows:
                  # plik nie ma wszystkich danych
                  self.show_setup_window()
 
+        else:
+            # plik nie ma wszystkich danych
+            self.show_setup_window()
 
     # glówne okno programu
     def show_main_window(self):
