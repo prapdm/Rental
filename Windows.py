@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from MainWindow import MainWindow
 from SetupWindow import SetupWindow
 from pathlib import Path
@@ -33,7 +34,7 @@ class Windows:
 
                     if cnx.is_connected:
                         # jest połaczenie odpal główne okno
-                        self.show_main_window()
+                        self.show_main_window(cnx)
                     else:
                         # nie ma połączenia - okno setup
                         self.show_setup_window()
@@ -50,8 +51,8 @@ class Windows:
             self.show_setup_window()
 
     # glówne okno programu
-    def show_main_window(self):
-        MainWindow()
+    def show_main_window(self, cnx):
+        MainWindow(cnx)
 
     # okno do wprowadzania danych niezbędnych do połączenia z bazą danych
     def show_setup_window(self):
