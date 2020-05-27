@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 import tkinter as tk
 from NewUserWindow import NewUserWindow
 from tkinter import messagebox
 
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, cnx):
+        self.cnx = cnx
         self.master = tk.Tk()
         self.frame = tk.Frame(self.master)
         self.master.title("Rental 1.0")
@@ -26,7 +28,7 @@ class MainWindow:
 
     def new_window(self):
         self.UserWindow = tk.Toplevel(self.master)
-        self.app = NewUserWindow(self.UserWindow)
+        self.app = NewUserWindow(self.UserWindow, self.cnx)
 
     def confirmexit(self):
         answer = messagebox.askquestion("Title", "Are you sure you want to leave?")
