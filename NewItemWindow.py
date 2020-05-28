@@ -48,7 +48,7 @@ class NewItemWindow:
             messagebox.showwarning(title="Information", message="Fill all fields.")
             return False
 
-        if self.cnx.is_connected != True:
+        if self.cnx.is_connected() != True:
             # nie ma polaczenia wiec zrob reconnect
             self.cnx.reconnect()
 
