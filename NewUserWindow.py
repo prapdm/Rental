@@ -12,12 +12,12 @@ from pathlib import Path
 
 
 class NewUserWindow:
-    def __init__(self, master, cnx):
+    def __init__(self, cnx):
         self.cnx = cnx
+        master = tk.Tk()
+        tk.Frame(master)
+        master.title("New User")
         self.master = master
-        self.frame = tk.Frame(self.master)
-        self.master.title("New User")
-
 
         # pole imie
         tk.Label(master, text="Name:").grid(row=0, sticky=W, padx=10, pady=5)
@@ -134,4 +134,7 @@ class NewUserWindow:
 
     def close_windows(self):
         self.master.destroy()
+
+
+
 
