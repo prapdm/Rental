@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
+import barcode
+from barcode.writer import ImageWriter
 from tkinter import *
 from tkinter import messagebox
+import hashlib
 from datetime import datetime
+from fpdf import FPDF
+import os
+from pathlib import Path
 
 class NewItemWindow:
     def __init__(self, cnx):
@@ -30,15 +36,29 @@ class NewItemWindow:
 
     # metody
 
+    def generate_ean(self, ean_number):
+        barCodeImage = barcode.get('ean13', ean_number, writer=ImageWriter())
+        filename = barCodeImage.save('assets/'+ean_number)
+        return filename
+
+
     def save(self, name, quanity):
         # sprawdzamy czy pola nie sa puste
         if len(name) == 0 or len(quanity) == 0:
             messagebox.showwarning(title="Information", message="Fill all fields.")
             return False
 
-        if self.cnx.is_connected != True:
+        if self.cnx.is_connected() != True:
             # nie ma polaczenia wiec zrob reconnect
-            self.cnx.reconnect
+            self.cnx.reconnect()
+
+        # generowanie numeru ean na podstawie nazwy
+        hash1 = hashlib.sha1()
+        hash1.update(str(name).encode('utf-8'))
+        ean = str(int(hash1.hexdigest(), 16))[:13]
+
+        # metoda generate_ean
+        image = self.generate_ean(ean)
 
 
         # zapisz dane do bazy - metoda save()
@@ -66,10 +86,22 @@ class NewItemWindow:
         cursor.close()
         self.cnx.close()
 
-        answer = messagebox.askquestion("Title", "Are you sure you want to save?")
+        answer = messagebox.askquestion("Title", "Do you want print item card?")
 
         if answer == "yes":
+            print(image)
+            pdf = FPDF(orientation='P', unit='mm', format='A4')
+            pdf.add_page()
+            pdf.rect(40, 30, 90, 50)
+            pdf.set_font("Arial", size=11)
+            pdf.cell(150, 125,name, 0, 0, 'C')
+            pdf.image(image, 60, 40, 50)
+            my_file = Path('assets/'+name+".pdf")
+            pdf.output(my_file)
+            os.startfile(my_file)
+
             self.close_windows()
+
 
         elif answer == "no":
             self.close_windows()
