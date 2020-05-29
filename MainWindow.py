@@ -2,6 +2,7 @@
 import tkinter as tk
 from NewUserWindow import NewUserWindow
 from NewItemWindow import NewItemWindow
+from FindUserWindow import FindUserWindow
 from tkinter import messagebox
 
 
@@ -13,7 +14,7 @@ class MainWindow:
         self.master.title("Rental 1.0")
         self.button1 = tk.Button(self.frame, text='New User', height=2, width=20, command=self.new_user_window)
         self.button1.pack(padx=90, pady=10)
-        self.button2 = tk.Button(self.frame, text='Find User', height=2, width=20)
+        self.button2 = tk.Button(self.frame, text='Find User', height=2, width=20, command=self.find_user)
         self.button2.pack(padx=90, pady=10)
         self.button3 = tk.Button(self.frame, text='User List', height=2, width=20)
         self.button3.pack(padx=90, pady=10)
@@ -32,6 +33,9 @@ class MainWindow:
 
     def new_item_window(self):
         NewItemWindow(self.cnx)
+
+    def find_user(self):
+        FindUserWindow(self.cnx)
 
     def confirmexit(self):
         answer = messagebox.askquestion("Title", "Are you sure you want to leave?")
