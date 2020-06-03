@@ -3,6 +3,8 @@ import tkinter as tk
 from NewUserWindow import NewUserWindow
 from NewItemWindow import NewItemWindow
 from FindUserWindow import FindUserWindow
+from FindItemWindow import FindItemWindow
+from UserListWindow import UserListWindow
 from tkinter import messagebox
 
 
@@ -16,11 +18,11 @@ class MainWindow:
         self.button1.pack(padx=90, pady=10)
         self.button2 = tk.Button(self.frame, text='Find User', height=2, width=20, command=self.find_user)
         self.button2.pack(padx=90, pady=10)
-        self.button3 = tk.Button(self.frame, text='User List', height=2, width=20)
+        self.button3 = tk.Button(self.frame, text='User List', height=2, width=20, command=self.user_list_window)
         self.button3.pack(padx=90, pady=10)
         self.button4 = tk.Button(self.frame, text='New Item', height=2, width=20, command=self.new_item_window)
         self.button4.pack(padx=90, pady=10)
-        self.button5 = tk.Button(self.frame, text='Find Item', height=2, width=20)
+        self.button5 = tk.Button(self.frame, text='Find Item', height=2, width=20, command=self.find_item)
         self.button5.pack(padx=90, pady=10)
         self.button6 = tk.Button(self.frame, text='Exit', height=2, width=20, command=self.confirmexit)
         self.button6.pack(padx=90, pady=10)
@@ -36,6 +38,14 @@ class MainWindow:
 
     def find_user(self):
         FindUserWindow(self.cnx)
+
+    def find_item(self):
+        FindItemWindow(self.cnx)
+
+    def user_list_window(self):
+        list = UserListWindow(self.cnx)
+        list.view_users(self)
+
 
     def confirmexit(self):
         answer = messagebox.askquestion("Title", "Are you sure you want to leave?")
