@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import *
-from ResultWindow import ResultWindow
-from tkinter import messagebox
+from ResultUserWindow import ResultUserWindow
+
 
 class FindUserWindow:
     def __init__(self, cnx):
@@ -84,7 +84,7 @@ class FindUserWindow:
         records = cursor.fetchall()
 
         # otworzmy nowe okno z wynikami
-        ResultWindow(self.cnx, records)
+        ResultUserWindow(self.cnx, records)
         self.master.destroy()
 
 
