@@ -3,11 +3,11 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-class ResultWindow:
+class ResultUserWindow:
     def __init__(self, cnx, records):
         master = tk.Tk()
         tk.Frame(master)
-        master.title("Results")
+        master.title("Results User")
         self.master = master
         self.cnx = cnx
 
