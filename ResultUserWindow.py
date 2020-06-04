@@ -8,6 +8,7 @@ class ResultUserWindow:
         master = tk.Tk()
         tk.Frame(master)
         master.title("Results User")
+        master.state('zoomed')
         self.master = master
         self.cnx = cnx
 
@@ -30,24 +31,26 @@ class ResultUserWindow:
     def show_table(self,records):
         # tworzymy tabele i naglowki
         cols = ('ID', 'Name', 'Surname', 'adress', 'Phone', 'Email', 'EAN')
-        table = ttk.Treeview(self.master, columns=cols, show='headings')
+        table = ttk.Treeview(self.master, columns=cols,selectmode='browse', show='headings')
+
         for col in cols:
             table.heading(col, text=col)
 
         #szerokość kolumn
-        table.column(cols[0], anchor='center', width=50)
-        table.column(cols[1], anchor='center', width=100)
-        table.column(cols[2], anchor='center', width=150)
-        table.column(cols[3], anchor='center', width=300)
-        table.column(cols[4], anchor='center', width=100)
-        table.column(cols[5], anchor='center', width=200)
-        table.column(cols[6], anchor='center', width=120)
+        table.column(cols[0], anchor='center', minwidth=50)
+        table.column(cols[1], anchor='center', minwidth=100)
+        table.column(cols[2], anchor='center', minwidth=150)
+        table.column(cols[3], anchor='center', minwidth=300)
+        table.column(cols[4], anchor='center', minwidth=100)
+        table.column(cols[5], anchor='center', minwidth=200)
+        table.column(cols[6], anchor='center', minwidth=120)
 
         # wstawiamy dane
         for row in records:
             table.insert("", "end", values=(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
         # siatka
+
         table.grid(row=4, column=0, padx=0, pady=0)
 
         return table
