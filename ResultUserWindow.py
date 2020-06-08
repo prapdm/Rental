@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import ttk
 
 class ResultUserWindow:
-    def __init__(self, cnx, records):
+    def __init__(self, cnx, records, zapytanie):
         master = tk.Tk()
         tk.Frame(master)
         master.title("Results User")
@@ -16,20 +16,24 @@ class ResultUserWindow:
 
         self.master = master
         self.cnx = cnx
+        self.zapytanie = zapytanie
 
-        v1 = StringVar(master, value='1')
-        v1.trace("w", lambda name, index, mode, v1=v1: self.filter_1(q1.get()))
-        q1 = tk.Entry(master, bd=1, textvariable=v1,state="disabled")
-        q1.grid(row=0, column=0, padx=250, pady=5, sticky=W)
-        self.q1 = q1
 
-        v2 = StringVar(master, value='1')
-        q2 = tk.Entry(master, bd=1, textvariable=v2)
-        q2.grid(row=1, column=0, padx=250, pady=5, sticky=W)
-
-        checkbox1 = Checkbutton(master, text="users who have borrowed minimum", variable=1, command=lambda: self.borrowed_days_click( q1.get()))
+        # Pierwszy checkbox
+        self.checkbox1_var = BooleanVar()
+        checkbox1 = Checkbutton(master, text="users who have borrowed minimum one item", variable=self.checkbox1_var, command=self.filter_1)
         checkbox1.grid(row=0,  column=0, sticky=W)
-        checkbox2 = Checkbutton(master, text="days after the deadline:", variable=2).grid(row=1, column=0,   sticky=W)
+
+        # Drugi checkbox
+        checkbox2 = Checkbutton(master, text="days after the deadline:", variable=2, command=lambda: self.deadline_click(pole.get()))
+        checkbox2.grid(row=1, column=0,   sticky=W)
+
+        # Pole teskstowe
+        textvariable = StringVar(master, value='1')
+        textvariable.trace("w", lambda name, index, mode, textvariable=textvariable: self.filter_2(pole.get()))
+        pole = tk.Entry(master, bd=1, textvariable=textvariable,state="disabled")
+        pole.grid(row=1, column=0, padx=250, pady=5, sticky=W)
+        self.pole = pole
 
         self.show_table(records)
 
@@ -72,26 +76,23 @@ class ResultUserWindow:
 
         return table
 
-    def borrowed_days_click(self, days):
-
-        if self.q1["state"] == "disabled":
-            self.q1.config(state='normal')
-        else:
-            self.q1.config(state='disabled')
-
-        self.filter_1(days)
-
-
-    def filter_1(self, days):
+    def filter_1(self):
 
         if self.cnx.is_connected() != True:
             # nie ma polaczenia wiec zrob reconnect
             self.cnx.reconnect()
 
-        if self.q1["state"] == "normal":
-            zapytanie = "SELECT * FROM users LEFT JOIN rentals ON users.id = rentals.user_id WHERE rentals.to_date < CURDATE() -" + days + " ORDER BY name ASC"
+
+
+
+        if self.checkbox1_var.get() == False:
+            zapytanie = "SELECT * FROM users LEFT JOIN rentals ON users.id = rentals.user_id WHERE rentals.to_date < CURDATE()  ORDER BY name ASC"
+            self.checkbox1_var.set(True)
         else:
-            zapytanie = "SELECT * FROM users ORDER BY name ASC"
+            zapytanie = self.zapytanie
+            self.checkbox1_var.set(False)
+
+        print(self.checkbox1_var.get())
 
         print(zapytanie)
 
@@ -102,4 +103,35 @@ class ResultUserWindow:
 
         self.show_table(records)
 
+    def deadline_click(self, days):
 
+        if self.pole["state"] == "disabled":
+            self.pole.config(state='normal')
+        else:
+            self.pole.config(state='disabled')
+
+        self.filter_2(days)
+
+
+
+
+
+    def filter_2(self, days):
+
+        if self.cnx.is_connected() != True:
+            # nie ma polaczenia wiec zrob reconnect
+            self.cnx.reconnect()
+
+        if self.pole["state"] == "normal":
+            zapytanie = "SELECT * FROM users LEFT JOIN rentals ON users.id = rentals.user_id WHERE rentals.to_date < CURDATE() -" + days + " ORDER BY name ASC"
+        else:
+            zapytanie = self.zapytanie
+
+        print(zapytanie)
+
+        # odpytaj baze
+        cursor = self.cnx.cursor()
+        cursor.execute(zapytanie)
+        records = cursor.fetchall()
+
+        self.show_table(records)
