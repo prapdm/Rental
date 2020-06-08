@@ -28,7 +28,7 @@ class UserListWindow:
         records = cursor.fetchall()
 
         # otworzmy nowe okno z wynikami
-        ResultUserWindow(self.cnx, records)
+        ResultUserWindow(self.cnx,records, zapytanie)
         self.master.destroy()
 
 
