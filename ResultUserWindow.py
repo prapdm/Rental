@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from UserWindow import UserWindow
 
 class ResultUserWindow:
     def __init__(self, cnx, records, zapytanie):
@@ -13,6 +14,9 @@ class ResultUserWindow:
         master.grid_columnconfigure(0, weight=1)
         master.grid_rowconfigure(2, weight=1)
 
+        # tymczasowo tworzymy obiekt w konstruktorze klasy ResultUserWindow
+        # do momentu az nie bedzie podpiety dwuklik na uzytkowniku
+        user = UserWindow(cnx)
 
         self.master = master
         self.cnx = cnx
