@@ -8,7 +8,7 @@ class FindItemWindow:
     def __init__(self, cnx):
         master = tk.Tk()
         tk.Frame(master)
-        master.title("Search Item")
+        master.title("Find Item")
         self.master = master
         self.cnx = cnx
 

@@ -2,6 +2,9 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from UserWindow import UserWindow
+from UsersFileWindow import UsersFileWindow
+from ReturnRentWindow import ReturnRentWindow
 
 class ResultUserWindow:
     def __init__(self, cnx, records, zapytanie):
@@ -12,6 +15,12 @@ class ResultUserWindow:
         # Fix for full with height
         master.grid_columnconfigure(0, weight=1)
         master.grid_rowconfigure(2, weight=1)
+
+        # tymczasowo tworzymy obiekt w konstruktorze klasy ResultUserWindow
+        # do momentu az nie bedzie podpiety dwuklik na uzytkowniku
+        user = UserWindow(cnx)
+        userswindow = UsersFileWindow(cnx)
+        returnrent = ReturnRentWindow(cnx)
 
 
         self.master = master
