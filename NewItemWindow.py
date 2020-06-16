@@ -65,7 +65,7 @@ class NewItemWindow:
         cursor = self.cnx.cursor()
         add_item = ("INSERT INTO items"
                     "(name, quanity, ean, created_at)"
-                    "VALUES (%(name)s, %(ean)s, %(quanity)s, %(created_at)s)")
+                    "VALUES (%(name)s, %(quanity)s, %(ean)s, %(created_at)s)")
 
         # aktualna data i czas
         now = datetime.now()
