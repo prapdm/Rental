@@ -64,8 +64,8 @@ class NewItemWindow:
         # zapisz dane do bazy - metoda save()
         cursor = self.cnx.cursor()
         add_item = ("INSERT INTO items"
-                    "(name, quanity, created_at)"
-                    "VALUES (%(name)s, %(quanity)s, %(created_at)s)")
+                    "(name, quanity, ean, created_at)"
+                    "VALUES (%(name)s, %(ean)s, %(quanity)s, %(created_at)s)")
 
         # aktualna data i czas
         now = datetime.now()
@@ -73,6 +73,7 @@ class NewItemWindow:
         data_item = {
             'name': name,
             'quanity': quanity,
+            'ean': ean,
             'created_at': now,
         }
 
