@@ -3,8 +3,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from UserWindow import UserWindow
-from UsersFileWindow import UsersFileWindow
-from ReturnRentWindow import ReturnRentWindow
 
 class ResultUserWindow:
     def __init__(self, cnx, records, zapytanie):
@@ -15,13 +13,6 @@ class ResultUserWindow:
         # Fix for full with height
         master.grid_columnconfigure(0, weight=1)
         master.grid_rowconfigure(2, weight=1)
-
-        # tymczasowo tworzymy obiekt w konstruktorze klasy ResultUserWindow
-        # do momentu az nie bedzie podpiety dwuklik na uzytkowniku
-        user = UserWindow(cnx)
-        userswindow = UsersFileWindow(cnx)
-        returnrent = ReturnRentWindow(cnx)
-
 
         self.master = master
         self.cnx = cnx
@@ -76,6 +67,7 @@ class ResultUserWindow:
         for row in records:
             table.insert("", "end", values=(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
+        table.bind("<Double-1>", self.OnDoubleClick)
 
         # tworzymy suwak boczny
         scroll = ttk.Scrollbar(self.master)
@@ -83,7 +75,7 @@ class ResultUserWindow:
         scroll.configure(command=table.yview)
         table.configure(yscrollcommand=scroll.set)
 
-        return table
+        self.table = table;
 
     def filter_1(self):
 
@@ -144,3 +136,9 @@ class ResultUserWindow:
         records = cursor.fetchall()
 
         self.show_table(records)
+
+
+    def OnDoubleClick(self, event):
+        item = self.table.selection()[0] # which row did you click on
+        id = self.table.item(item)['values'][0]
+        UserWindow(self.cnx , id)
