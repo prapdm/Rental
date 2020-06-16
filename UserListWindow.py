@@ -26,6 +26,11 @@ class UserListWindow:
         cursor = self.cnx.cursor()
         cursor.execute(zapytanie)
         records = cursor.fetchall()
+        # Make sure data is committed to the database
+        self.cnx.commit()
+
+        # rozlacz z bazą
+        cursor.close()
 
         # otworzmy nowe okno z wynikami
         ResultUserWindow(self.cnx,records, zapytanie)
