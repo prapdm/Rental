@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import *
 from UserEditWindow import UserEditWindow
 from UserHistoryWindow import UserHistoryWindow
-from ReturnRentWindow import ReturnRentWindow
+from ReturnWindow import ReturnWindow
+from RentWindow import RentWindow
 
 class UserWindow:
     def __init__(self, cnx, id):
@@ -117,7 +118,7 @@ class UserWindow:
         UserHistoryWindow(self.cnx , self.id)
 
     def rent_item(self):
-        ReturnRentWindow(self.cnx , self.id)
+        RentWindow(self.cnx, self.id)
 
     def reurned_item(self):
-        ReturnRentWindow(self.cnx, self.id)
+        ReturnWindow(self.cnx, self.id)

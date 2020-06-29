@@ -4,11 +4,11 @@ from tkinter import *
 from datetime import datetime
 from tkinter import messagebox
 
-class ReturnRentWindow:
+class ReturnWindow:
     def __init__(self, cnx, id):
         master = tk.Tk()
         tk.Frame(master)
-        master.title("Return / Rent")
+        master.title("Return")
         self.master = master
         self.cnx = cnx
 
