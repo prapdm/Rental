@@ -19,9 +19,9 @@ class Windows:
             # pętla przez każdą linię
             for line in config:
                 lines.append(line)
-
+            print(len(lines))
             # jestli plik nie jest pusty (minimum 5 lini) sprawdź połączenie
-            if len(lines) > 4:
+            if len(lines) == 5:
 
                 user = lines[0].rstrip()
                 password = lines[1].rstrip()
@@ -34,6 +34,7 @@ class Windows:
 
                     if cnx.is_connected:
                         # jest połaczenie odpal główne okno
+                        print("Connected - main window")
                         self.show_main_window(cnx)
                     else:
                         # nie ma połączenia - okno setup
