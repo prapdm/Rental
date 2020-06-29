@@ -12,7 +12,7 @@ class SetupWindow():
         master.title("Setup database connection")
         master.resizable(False, False)
         window_height = 250
-        window_width = 295
+        window_width = 320
         screen_width = master.winfo_screenwidth()
         screen_height = master.winfo_screenheight()
         x_cordinate = int((screen_width / 2) - (window_width / 2))
@@ -50,10 +50,10 @@ class SetupWindow():
 
         self.info = tk.StringVar(value="")
         self.infolabel = tk.Label(master, textvariable=self.info)
-        self.infolabel.grid(row=5, sticky=W, padx=10, pady=5)
+        self.infolabel.grid(row=6,  sticky=W, padx=10, pady=5, columnspan=2)
 
-        tk.Button(master, text='Test connection', height=2, width=15, command=lambda : self.test_connection(user.get(), password.get(), address.get(), dbname.get(), port.get())).grid(row=6, column=0, padx=10, pady=5)
-        tk.Button(master, text='Save', height=2, width=15, command=lambda : self.save_settings(user.get(), password.get(), address.get(), dbname.get(), port.get())).grid(row=6, column=1, padx=10, pady=5)
+        tk.Button(master, text='Test connection', height=2, width=15, command=lambda : self.test_connection(user.get(), password.get(), address.get(), dbname.get(), port.get())).grid(row=7, column=0, padx=10, pady=5)
+        tk.Button(master, text='Save', height=2, width=15, command=lambda : self.save_settings(user.get(), password.get(), address.get(), dbname.get(), port.get())).grid(row=7, column=1, padx=10, pady=5)
 
         master.mainloop()
 
@@ -75,7 +75,7 @@ class SetupWindow():
 
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 self.infolabel.config(fg='red')
-                self.info.set("Something is wrong with your name or password")
+                self.info.set("Something - wrong name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 self.infolabel.config(fg='red')
                 self.info.set("Database does not exist")
@@ -91,6 +91,7 @@ class SetupWindow():
         # przed zapisem sprawdzmy czy dane są prawidlowe i czy jest polaczenie
 
         if self.test_connection(user, password, host, database, port):
+
             # mamy połączenie z bazą zapiszmy dane do bazy
 
             # sciezka do naszego pliku
