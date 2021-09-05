@@ -50,7 +50,7 @@ class RentWindow:
             return False
 
         # poczatek zapytania SQL
-        zapytanie = "SELECT * FROM `items` WHERE `ean` = " + str(ean) + " LIMIT 1"
+        zapytanie = "SELECT * FROM `items` WHERE `ean` = " + ean + " LIMIT 1"
         print(zapytanie)
 
         # odpytaj baze
@@ -58,6 +58,7 @@ class RentWindow:
         cursor.execute(zapytanie)
         records = cursor.fetchall()
 
+        print(len(records))
         # sprawdzamy czy taki kod EAN istnieje w bazie
         if len(records) == 0 :
             messagebox.showwarning(title="Information", message="There is no item with this EAN number.")
