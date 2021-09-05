@@ -39,20 +39,20 @@ pip install -r requirements.txt
 
 ### Screenshots
 
-![Alt text](screens/main-window.jpg?raw=true "Main window")
+![Alt text](screens/main-window.JPG?raw=true "Main window")
 
 ### Add new user
 
-![Alt text](screens/user.jpg?raw=true "User")
-![Alt text](screens/user-card.jpg?raw=true "User card")
-![Alt text](screens/user-card-ean.jpg?raw=true "EAN")
+![Alt text](screens/user.JPG?raw=true "User")
+![Alt text](screens/user-card.JPG?raw=true "User card")
+![Alt text](screens/user-card-ean.JPG?raw=true "EAN")
 
 ### Add new items
 
-![Alt text](screens/new-item.jpg?raw=true "Item")
-![Alt text](screens/item-ean.jpg?raw=true "EAN")
+![Alt text](screens/new-item.JPG?raw=true "Item")
+![Alt text](screens/item-ean.JPG?raw=true "EAN")
 
 ### Rent and return 
 
-![Alt text](screens/rent.jpg?raw=true "Item")
-![Alt text](screens/history.jpg?raw=true "Item")
+![Alt text](screens/rent.JPG?raw=true "Item")
+![Alt text](screens/history.JPG?raw=true "Item")
