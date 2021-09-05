@@ -19,7 +19,7 @@ class Windows:
             # pętla przez każdą linię
             for line in config:
                 lines.append(line)
-            print(len(lines))
+            # print(len(lines))
             # jestli plik nie jest pusty (minimum 5 lini) sprawdź połączenie
             if len(lines) == 5:
 
