@@ -21,6 +21,10 @@ SET time_zone = "+00:00";
 -- Baza danych: `rental`
 --
 
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS rentals;
+DROP TABLE IF EXISTS users;
+
 -- --------------------------------------------------------
 
 --
@@ -69,7 +73,7 @@ CREATE TABLE `users` (
   `email` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `ean` bigint(13) NOT NULL,
   `created_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `update_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
